@@ -38,10 +38,13 @@ app.route('/')
 		  res.sendFile(process.cwd() + '/views/index.html');
     })
 
-app.route('/*')
-  .get(function(req, res)
+app.get('/*', function(req, res)
   {
-    res.send(req.params[0]);
+    if(req.params[0].length===10)
+      res.send(req.params[0]);
+  else
+    res.send('ideut');
+  
 });
 
 // Respond not found to all the wrong routes
