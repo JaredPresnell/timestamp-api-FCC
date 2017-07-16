@@ -40,9 +40,9 @@ app.route('/')
 
 app.route('/*')
   .get(function(req, res)
-      {
-  res.type('txt').send(JSON.stringify(req));
-})
+  {
+    res.send(req.params[0]);
+});
 
 // Respond not found to all the wrong routes
 app.use(function(req, res, next){
