@@ -39,12 +39,17 @@ app.route('/')
     })
 
 app.get('/*', function(req, res)
+{
+  var dateIn = req.params[0];
+  var dateInIsNum = +dateIn;
+  if(!isNaN(dateInIsNum))
   {
-    if(typeof(req)==='number')
-      res.send(req.params[0]);
+    res.send('the num' + dateInIsNum); //do calculations for unix time
+  }
   else
-    res.send('ideut');
-  
+  {
+    res.send(req.params[0]); // parse out the date
+  }  
 });
 
 // Respond not found to all the wrong routes
