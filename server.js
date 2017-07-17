@@ -40,7 +40,7 @@ app.route('/')
 
 app.get('/*', function(req, res)
   {
-    if(req.params[0].length===10)
+    if(typeof(req)==='number')
       res.send(req.params[0]);
   else
     res.send('ideut');
