@@ -49,14 +49,21 @@ app.get('/*', function(req, res)
   {
     var newDate = new Date(dateInIsNum*1000);
     var returnDate = ''+monthNames[newDate.getMonth()]+ ' '+newDate.getDate()+', '+newDate.getFullYear();
-    res.send(returnDate); //do calculations for unix time
+    var returnObj = {unix: dateIn, natural: returnDate}
+    res.send(returnObj); //do calculations for unix time
   }
   else
   {
     var dateArr = req.params[0].split(' ');
     var day = parseInt(dateArr[1]);
-    var dateString= ''+(monthNames.indexOf(dateArr[0])+1)+'-'+parseIdateArr[1];
-    res.send(''+day); // parse out the date
+    var dateString= ''+(monthNames.indexOf(dateArr[0])+1)+'-'+parseInt(dateArr[1])+'-'+dateArr[2];
+    var newDate = new Date(dateString).getTime()/1000;
+    var returnObj = {};
+    if(newDate===0)
+      returnObj = {unix: null, natural: null};
+    else
+      returnObj ={unix: newDate, natural: req.params[0]};
+    res.send(returnObj); // parse out the date
   }  
 });
 
