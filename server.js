@@ -59,7 +59,7 @@ app.get('/*', function(req, res)
     var dateString= ''+(monthNames.indexOf(dateArr[0])+1)+'-'+parseInt(dateArr[1])+'-'+dateArr[2];
     var newDate = new Date(dateString).getTime()/1000;
     var returnObj = {};
-    if(newDate===0)
+    if(!  newDate)
       returnObj = {unix: null, natural: null};
     else
       returnObj ={unix: newDate, natural: req.params[0]};
