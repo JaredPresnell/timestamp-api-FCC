@@ -40,17 +40,24 @@ app.route('/')
 
 app.get('/*', function(req, res)
 {
+  var monthNames = ["January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
   var dateIn = req.params[0];
   var dateInIsNum = +dateIn;
   if(!isNaN(dateInIsNum))
   {
-    res.send('the num' + dateInIsNum); //do calculations for unix time
+    var newDate = new Date(dateInIsNum*1000);
+    var returnDate = ''+monthNames[newDate.getMonth()]+ ' '+newDate.getDate()+', '+newDate.getFullYear();
+    res.send(returnDate); //do calculations for unix time
   }
   else
   {
+    
     res.send(req.params[0]); // parse out the date
   }  
 });
+
 
 // Respond not found to all the wrong routes
 app.use(function(req, res, next){
