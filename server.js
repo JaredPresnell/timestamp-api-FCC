@@ -53,8 +53,10 @@ app.get('/*', function(req, res)
   }
   else
   {
-    
-    res.send(req.params[0]); // parse out the date
+    var dateArr = req.params[0].split(' ');
+    var day = parseInt(dateArr[1]);
+    var dateString= ''+(monthNames.indexOf(dateArr[0])+1)+'-'+parseIdateArr[1];
+    res.send(''+day); // parse out the date
   }  
 });
 
